@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>	感知机 Perceptron </title>
+	<meta charset='utf-8'>
+	<script src='slides.js'>
+	</script>
+</head>
+
+<style>
+	/* Your individual styles here, or just use inline styles if that’s what
+	you want. */
+</style>
+
+<body style='display: none'>
+	<section class='slides layout-regular template-default'>
+		
+		<article>
+			<h1>关于感知机的报告</h1>
+			<p> 王薄 </p>  
+			<p> i@oooly.com </p>
+			<p> 2013年 12月 18日 </p>
+		</article>
+		
+		<article>
+			<h3>关于感知机的报告</h3>
+			<ul>
+				<li>什么是感知机？</li>
+				<li>感知机学习算法</li>
+				<li>一个感知机的例子</li>
+				<li>如何将感知机用于中文分词</li>
+			</ul>
+		</article>
+
+		<article>
+			<h3>什么是感知机？</h3>
+			<ul class="build">
+				<li>感知机使用 <span class="red">特征向量</span> 来表示的前馈式人工神经网络</li>
+				<li>它是一种 <span class="red">二元分类器</span></li>
+				<li><img class='centered' src='img/50ef14a2714fdf22838ffd68154c5c90.png'></li>
+				<li>w 是实数的表示权重的向量，w • x 是点积，b 是偏置</li>
+				<li><p>f(x) (0 或 1)用于对x进行分类：</p>
+				<p>w • x + b > 0 时，x 属于 1 ，反之，x 属于 0 </p></li>
+			</ul>
+		</article>
+
+		<article>
+			<h3>感知机学习算法</h3>
+			<ul class="build">
+				<li>感知机学习的核心是对权重的调节</li>
+				<li>基本思想：</li>
+				<li>当一个实例点被误分类，即位于分类超平面错误的一侧时，则调整w和b，使分类超平面向该误分类点的一侧移动，以减少该误分类点与超平面的距离，直到超平面越过该误分类点使其被正确分类为止。</li>
+				<li><img src='img/1.png'></li>
+			<ul>
+		</article>
+
+		<article>
+			<h3>感知机学习算法的步骤</h3>
+			<ul class="build">
+				<li>确定学习的步长参数</li>
+				<li>随即给定权重初始值</li>
+				<li>确定训练样本对，包含输入x与x理想的类别</li>
+				<li>对训练集中每一个样本进行分类，若一个样本被误分类，则向趋于正确分类的方向调整权重</li>
+				<li>直到训练集中没有被误分类的点或正确率收敛为止</li>
+			</ul>
+		</article>
+
+		<article>
+			<h3>一个感知机的例子</h3>
+			<ul class="build">
+				<li></li>
+			</ul>	
+		</article>
+
+		<article>
+			<h3>如何将感知机用于中文分词</h3>
+			<p>分词问题的转化：</p>
+			<p>例句：今天 / 是 / 星期天 / 。</p>
+			<table>
+				<tr> 
+					<td> 今 <td> 天 <td> 是 <td> 星 <td> 期 <td> 天 <td> 。
+				<tr class="build">
+					<td><span class="blue">b</span><td><span class="yellow">e</span><td><span class="red">s</span><td><span class="blue">b</span><td><span class="green">m</span><td><span class="red">s</span><td><span class="red">s</span>
+			</table>
+			<p>例句：现在 / 是 / 北京时间 / 十点 / 。</p>
+			<table>
+				<tr>
+					<td> 现 <td> 在 <td> 是 <td> 北 <td> 京 <td> 时 <td> 间 <td> 十 <td> 点 <td> 。
+				<tr class="build">
+					<td><span class="blue">b</span> <td><span class="yellow">e</span> <td><span class="red">s</span><td><span class="blue">b</span><td><span class="green">m</span><td><span class="green">m</span><td><span class="yellow">e</span><td><span class="blue">b</span><td><span class="yellow">e</span><td><span class="red">s</span>
+			</table>
+		</article>
+		
+		<article>
+			<h3>如何将感知机用于中文分词</h3>
+			<p>例句：今天 / 是 / 星期天 / 。</p>
+			<table>
+				<tr>
+					<th> <th><span class="blue">b</span><th><span class="green">m</span><th><span class="yellow">e</span><th><span class="red">s</span>
+				<tr>
+					<td> 今 <td> Value1 <td> Value2 <td> Value3 <td> Value4
+				<tr>
+					<td> 天 <td> Value1 <td> Value2 <td> Value3 <td> Value4
+				<tr>
+					<td> 是 <td> Value1 <td> Value2 <td> Value3 <td> Value4
+				<tr>
+					<td> 星 <td> Value1 <td> Value2 <td> Value3 <td> Value4
+				<tr>
+					<td> 期 <td> Value1 <td> Value2 <td> Value3 <td> Value4
+				<tr>
+					<td> 天 <td> Value1 <td> Value2 <td> Value3 <td> Value4
+			</table>
+		</article>
+
+		<article>
+			<h3>如何将感知机用于中文分词</h3>
+			<ul class="build">
+				<li>用f[i]表示 将前i个字标上bmes 所能获得的最大Value</li>
+				<li>f[i] = max{ f[k] + 第k到i个字所组成的词的Value } 其中 i - k < MAXLEN </li>
+				<li><h2>每个字的bmes所对应的Value是如何求得的？<h2></li>
+			</ul>
+		</article>
+
+		<article>
+			<h3>如何将感知机用于中文分词</h3>
+			<ul class="build">
+					
+			</ul>
+		</article>
+	</section>
+</body>
+
+</html>
